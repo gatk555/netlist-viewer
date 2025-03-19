@@ -9,7 +9,7 @@ on:
 
 jobs:
   LinuxBuild:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     steps:
     # install deps
@@ -21,8 +21,14 @@ jobs:
     - name: build netlist-viewer
       run: cd NetlistViewer/build/linux && make
 
+    - name: Save
+      uses: actions/upload-artifact@v4
+      with:
+        name: NetlistViewer, Linux X86-64
+        path: NetlistViewer/build/linux/NetlistViewer
+
   WindowsBuild:
-    runs-on: windows-latest
+    runs-on: windows-2022
     steps:
       - uses: actions/checkout@v4
       - name: Add msbuild to PATH
